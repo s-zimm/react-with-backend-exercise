@@ -10,9 +10,9 @@ const PostTitleContainer = ({allSelectedUserPosts, titleContainerClick, selected
                                 .map((post, i) => {
                                     return (
                                         <PostTitle 
-                                            key={i}
-                                            index={i}
-                                            titleContainerClick={() => titleContainerClick(i)}
+                                            key={post.id}
+                                            id={post.id}
+                                            titleContainerClick={titleContainerClick}
                                             title={post.title}
                                             content={post.content}
                                             author={post.userId}

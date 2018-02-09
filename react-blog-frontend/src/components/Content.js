@@ -10,9 +10,15 @@ class Content extends Component {
         super(props);
 
         this.state = {
-            postIndex: 0
+            selectedPostId: 0
         }
     }
+
+    _handleTitleContainerClick = (i) => {
+        this.setState({
+          selectedPostId: Number(i)
+        })
+      }
 
     // if (!props.postContent || !props.userData) {
     //     return <div>Loading...</div>
@@ -22,11 +28,12 @@ class Content extends Component {
         return (
             <div className="view-user-content">
                 <ContentEditor 
-
+                    selectedUserPost={this.props.allSelectedUserPosts.find(post => Number(post.id) === this.state.selectedPostId)}
+                    handlePostEdit={this.props.handlePostEdit}
                 />
                 <PostTitleContainer 
                     allSelectedUserPosts={this.props.allSelectedUserPosts}
-                    titleContainerClick={this.props.handleTitleContainerClick}
+                    titleContainerClick={this._handleTitleContainerClick}
                     selectedUserId={this.props.selectedUserId}
                 />
             </div>

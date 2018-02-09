@@ -14,14 +14,14 @@ class App extends Component {
     super(props);
     
     this.state = {
-      // currentIndex: 0,
+      currentPostId: 0,
       selectedUserId: 0
     }
   }
 
   componentDidMount() {
     fetch('http://localhost:3000/blog')
-      .then(data => data.json(data))
+      .then(data => data.json())
       .then(data => this.setState({
         posts: data
       }));
@@ -47,13 +47,12 @@ class App extends Component {
                 handleUserFilter={this._handleUserFilter}
             />
             <Content
-              selectedPost={this.state.posts[this.state.currentIndex]}
               allSelectedUserPosts={this.state.posts.filter(post => {
                 return post.userId === this.state.selectedUserId})}
               selectedUser={this.state.users.find(user => user.id === this.state.selectedUserId)}
-              handlePostEdit={this._handlePostEdit}
               selectedUserId={this.state.selectedUserId}
               handleTitleContainerClick={this._handleTitleContainerClick}
+              handlePostEdit={this._handlePostEdit}
             />
           </div>
         
@@ -62,17 +61,16 @@ class App extends Component {
     );
   }
 
-  _handleTitleContainerClick = (i) => {
+  _handlePostEdit = (value, id) => {
     this.setState({
-      currentIndex: i
-    })
-  }
-
-  _handlePostEdit = (value) => {
-    this.setState(oldState => {
-      let newState = oldState;
-      return newState.posts[oldState.currentIndex].content = value;
-    })
+      currentPostId: id
+    }, () => {
+      this.setState(oldState => {
+        let newState = oldState;
+        let alteringPost = newState.posts.find(post => post.id === this.state.currentPostId)
+        return alteringPost.content = value;
+      })
+    }) 
   }
 
   _handleUserFilter = (selectedUserId) => {
