@@ -28,7 +28,8 @@ class UserSelect extends Component {
         return (
         <div className="user-select">
             <p>Select posts of user:</p>
-            <select name="users" id="users" onChange={(event) => {this._handleUserFilter(event.target.value)}}>
+            <select name="users" id="users" defaultValue='Select user' onChange={(event) => {this._handleUserFilter(event.target.value)}}>
+                <option selected>Select user</option>
                 {usersList}   
             </select>
         </div>
