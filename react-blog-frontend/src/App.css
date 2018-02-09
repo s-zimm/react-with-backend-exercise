@@ -1,0 +1,32 @@
+.body-container {
+  display: flex;
+}
+
+.post-title-container {
+  width: 35%;
+}
+
+.content-editor {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-textbox {
+  width: 100%;
+  height: 300px;
+}
+
+.user-select {
+  align-self: flex-end;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.save-button {
+  align-self: center;
+  width: 40%;
+  margin-top: 10px;
+}
