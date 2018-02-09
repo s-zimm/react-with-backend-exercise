@@ -7,13 +7,14 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import PostTitle from './components/PostTitle';
 import PostTitleContainer from './components/PostTitleContainer';
 import Content from './components/Content';
+import UserSelect from './components/UserSelect';
 
 class App extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      currentIndex: 0,
+      // currentIndex: 0,
       selectedUserId: 0
     }
   }
@@ -33,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.posts) {
+    if (!this.state.posts || !this.state.users) {
       return <div>Loading...</div>
     }
     return (
@@ -41,19 +42,18 @@ class App extends Component {
       <div className="App">
           <h1 className="App-title">React Blog Post Editor</h1>
           <div className="body-container">
-            <PostTitleContainer
-              postData={this.state.posts}
-              titleContainerClick={this._handleTitleContainerClick}
-              selectedUserId={this.state.selectedUserId}
+            <UserSelect 
+                userData={this.state.users}
+                handleUserFilter={this._handleUserFilter}
             />
             <Content
-              postContent={this.state.posts[this.state.currentIndex].content}
-              postTitle={this.state.posts[this.state.currentIndex].title}
-              postId={this.state.posts[this.state.currentIndex].id}
+              selectedPost={this.state.posts[this.state.currentIndex]}
+              allSelectedUserPosts={this.state.posts.filter(post => {
+                return post.userId === this.state.selectedUserId})}
+              selectedUser={this.state.users.find(user => user.id === this.state.selectedUserId)}
               handlePostEdit={this._handlePostEdit}
-              userData={this.state.users}
-              handleUserFilter={this._handleUserFilter}
               selectedUserId={this.state.selectedUserId}
+              handleTitleContainerClick={this._handleTitleContainerClick}
             />
           </div>
         
@@ -77,7 +77,7 @@ class App extends Component {
 
   _handleUserFilter = (selectedUserId) => {
     this.setState({ 
-      selectedUserId
+      selectedUserId: Number(selectedUserId)
     });
   }
 

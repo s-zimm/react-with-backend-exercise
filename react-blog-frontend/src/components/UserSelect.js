@@ -37,9 +37,10 @@ class UserSelect extends Component {
     }
 
     _handleUserFilter = value => {
-        this.setState({
-            selected: value
-        }, () => this.props.handleUserFilter(value));
+        // this.setState({
+        //     selected: value
+        // }, (value) => this.props.handleUserFilter(value));
+        return this.props.handleUserFilter(value);
         
     }
 }

@@ -1,26 +1,24 @@
 import React from 'react';
 import PostTitle from './PostTitle';
 
-const PostTitleContainer = (props) => {
-    if (!props.postData) {
+const PostTitleContainer = ({allSelectedUserPosts, titleContainerClick, selectedUserId}) => {
+    if (!allSelectedUserPosts) {
         return <div>Loading...</div>
     }
 
-    let titleArray = props.postData
+    let titleArray = allSelectedUserPosts
                                 .map((post, i) => {
                                     return (
                                         <PostTitle 
                                             key={i}
                                             index={i}
-                                            titleContainerClick={() => props.titleContainerClick(i)}
+                                            titleContainerClick={() => titleContainerClick(i)}
                                             title={post.title}
                                             content={post.content}
                                             author={post.userId}
                                         />
                                     )
                                 })
-                                .filter((comp) => comp.props.author === Number(props.selectedUserId))
-                                
 
     return (
         <div className="post-title-container">

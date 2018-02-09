@@ -1,40 +1,40 @@
 import React, { Component } from 'react';
 
 import UserSelect from './UserSelect';
+import PostTitleContainer from './PostTitleContainer';
+import ContentEditor from './ContentEditor';
 
 
-const Content = props => {
-    if (!props.postContent || !props.userData) {
-        return <div>Loading...</div>
+class Content extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            postIndex: 0
+        }
     }
 
-    let _handleSaveButton = () => {
-        fetch('http://localhost:3000/blog', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                postId: props.postId,
-                title: props.postTitle,
-                content: props.postContent,
-                userId: props.selectedUserId
+    // if (!props.postContent || !props.userData) {
+    //     return <div>Loading...</div>
+    // }
 
-            })
-        })
+    render() {
+        return (
+            <div className="view-user-content">
+                <ContentEditor 
+
+                />
+                <PostTitleContainer 
+                    allSelectedUserPosts={this.props.allSelectedUserPosts}
+                    titleContainerClick={this.props.handleTitleContainerClick}
+                    selectedUserId={this.props.selectedUserId}
+                />
+            </div>
+        );
     }
-
-    return (
-        <div className ="content-editor">
-            <UserSelect 
-                userData={props.userData}
-                handleUserFilter={props.handleUserFilter}
-            />
-            <textarea className="content-textbox" value={props.postContent} onChange={(event)=> props.handlePostEdit(event.target.value)} />
-            <button className="save-button" onClick={_handleSaveButton}>Save</button>
-        </div>
-    )
 }
 
 export default Content;
+
+// TODO::::::::::
+// ADD CLICK HANDLER FOR POST TITLE INSIDE CONTAINER THAT CHANGES VALUE OF CONTENT EDITOR

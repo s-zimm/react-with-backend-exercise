@@ -1,15 +1,25 @@
 .body-container {
   display: flex;
+  flex-direction: column;
+}
+
+.view-user-content {
+  display: flex;
+  margin-top: 15px;
 }
 
 .post-title-container {
-  width: 35%;
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .content-editor {
   width: 60%;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
 }
 
 .content-textbox {
