@@ -28,8 +28,7 @@ const ContentEditor = (props) => {
     } else {
         return (
             <div className ="content-editor">
-                <textarea className="content-textbox" value='' onChange={(event)=> props.handlePostEdit(event.target.value, props.selectedUserPost.id)} />
-                <button className="save-button" onClick={_handleSaveButton}>Save</button>
+                <h3>Select a user and post</h3>
             </div>
         )
     }
